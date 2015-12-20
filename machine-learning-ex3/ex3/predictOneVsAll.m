@@ -10,12 +10,12 @@ function p = predictOneVsAll(all_theta, X)
 
 m = size(X, 1);
 num_labels = size(all_theta, 1);
-
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
@@ -33,7 +33,14 @@ X = [ones(m, 1) X];
 
 
 
-
+for i = 1:m
+for k = 1:num_labels
+a(i,k)=sigmoid(X(i,:)*all_theta(k,:)');
+end
+end
+for i = 1:m
+[x, ix] = max(a(i,:));
+p(i) = ix;
 
 
 % =========================================================================
