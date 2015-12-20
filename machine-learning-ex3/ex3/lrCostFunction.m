@@ -38,6 +38,7 @@ k = X*theta;
 h_X = sigmoid(k);
 first_t = -y.*(log(h_X)); 
 second_t = (1-y).*(log(1-h_X));
+<<<<<<< HEAD
 J_first = (1/m)*sum(first_t-second_t);
 n = length(theta);
 thetas = (lambda/(2*m))*sum(theta(2:end).^2);
