@@ -25,16 +25,6 @@ end
 
 thetas = (lambda/(2*m))*thetas;
 J = J_first+thetas;
-grad = zeros(size(theta));
-
-k = X*theta;
-h_X = sigmoid(k);
-
-grad(1) = (1/m)*sum((h_X-y).*X(:,1));
-
-for iter = 2:n
-	grad(iter) = (1/m)*sum((h_X-y).*X(:,iter)) + ((lambda/m)*theta(iter));
-end 
 
 
 
