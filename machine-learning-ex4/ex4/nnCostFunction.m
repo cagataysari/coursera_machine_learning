@@ -64,13 +64,17 @@ Theta2_grad = zeros(size(Theta2));
 
 %%%%%%%%%%%%%%%%%%% Start of Part 1 
 
+%%% forward pass
 X = [ones(m, 1) X]; % add bias to X
 a1 = X;
 z2 = a1*Theta1'; % compute a1
 a2 = sigmoid(z2);
 a2 = [ones(size(a2,1),1) a2];
 z3 = a2*Theta2';
-a3 = sigmoid(z3);
+a3 = sigmoid(z3); 
+%%%%
+ 
+
 first = 0;
 second = 0;
 
@@ -86,9 +90,31 @@ J = (1/m)*(first-second);
 Theta1_r = Theta1(:,2:end).^2; % don't regularize the x0's weight
 Theta2_r = Theta2(:,2:end).^2; % don't regularize the a20's weight
 
-Thetas = (lambda/(2*m))*(sum(Theta1_r(:))+sum(Theta2_r(:)))
+Thetas = (lambda/(2*m))*(sum(Theta1_r(:))+sum(Theta2_r(:)));
 
 J += Thetas;
+ 
+for k = 1:m
+	
+	y_vect(y(k))=1;
+	a_back_1 = X(k,:);
+	z_back_2 = a_back_1*Theta1';
+	a_back_2 = sigmoid(z_back_2);
+	a_back_2 = [ones(size(a_back_2,1),1) a_back_2];
+	z_back_3 = a_back_2*Theta2';
+	a_back_3 = sigmoid(z_back_3);
+	
+	delta_3 = (a_back_3-y_vect);
+	delta_2 = (delta_3*Theta2);
+	delta_2 = delta_2(:,2:end); 
+	delta_2 = delta_2.*sigmoidGradient(z_back_2);
+	
+	Theta2_grad += (1/m)*(delta_3'*a_back_2);
+	Theta1_grad += (1/m)*(delta_2'*a_back_1);
+    y_vect(y(k)) = 0;
+end
+
+
 
 %%%%%%%%%%%%%%%%%%% End of Part 1 
 
