@@ -114,7 +114,9 @@ for k = 1:m
     y_vect(y(k)) = 0;
 end
 
-
+ 
+Theta1_grad(:,2:end) += (lambda/m)*Theta1(:,2:end);
+Theta2_grad(:,2:end) += (lambda/m)*Theta2(:,2:end);
 
 %%%%%%%%%%%%%%%%%%% End of Part 1 
 
