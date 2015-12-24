@@ -26,9 +26,9 @@ Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):en
 m = size(X, 1);
          
 % You need to return the following variables correctly 
-J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
+
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
@@ -62,25 +62,29 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%%%%%%%%%%%%%%%%%%% Start of Part 1 
+
+X = [ones(m, 1) X]; % add bias to X
+a1 = X;
+z2 = a1*Theta1'; % compute a1
+a2 = sigmoid(z2);
+a2 = [ones(size(a2,1),1) a2];
+z3 = a2*Theta2';
+a3 = sigmoid(z3);
+first = 0;
+second = 0;
+
+y_vect = zeros(1,size(a3,2));
+for i = 1:m
+y_vect(y(i))=1;
+first += -y_vect*log(a3(i,:)');
+second += ((1-y_vect)*log(1-a3(i,:)'));
+y_vect(y(i)) = 0;
+end
+J = (1/m)*(first-second);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%% End of Part 1 
 
 % =========================================================================
 
