@@ -83,6 +83,12 @@ y_vect(y(i)) = 0;
 end
 J = (1/m)*(first-second);
 
+Theta1_r = Theta1(:,2:end).^2; % don't regularize the x0's weight
+Theta2_r = Theta2(:,2:end).^2; % don't regularize the a20's weight
+
+Thetas = (lambda/(2*m))*(sum(Theta1_r(:))+sum(Theta2_r(:)))
+
+J += Thetas;
 
 %%%%%%%%%%%%%%%%%%% End of Part 1 
 
