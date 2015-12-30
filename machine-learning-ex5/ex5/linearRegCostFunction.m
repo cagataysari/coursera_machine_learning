@@ -32,7 +32,7 @@ J = sum((X*theta-y).^2)*(1/(2*m));
 
 J += thetas;
 
-grad = zeros(size(theta));
+
 temp = theta;
 temp(1) = 0;
 grad  += (1/m)*X'*((X*theta)-y) + (lambda/m).*temp;
