@@ -17,6 +17,7 @@ a_3 = sigmoid(z_3);
 for i = 1:size(a_3,1)
 	[x ix] = max(a_3(i,:));
 	p(i) = ix;
+end 
 
 % You need to return the following variables correctly 
 
