@@ -31,7 +31,7 @@ for i = 1:length(C)
 		predictions = svmPredict(model, Xval);
 		m = mean(double(predictions ~= yval));
 		Means(enum,:) = [ m, C(i), sigma(k)];
-		enum += 1
+		enum += 1;
 	end
 end
 
